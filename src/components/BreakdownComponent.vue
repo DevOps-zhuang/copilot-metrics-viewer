@@ -23,7 +23,7 @@
             <v-card>
               <v-card-item class="d-flex justify-center align-center">
                 <div class="spacing-25"></div>
-                <div class="text-h6 mb-1">Top 5 {{ breakdownDisplayNamePlural }} by accepted suggestions(prompts)</div>
+                <div class="text-h6 mb-1">Top 5 {{ breakdownDisplayNamePlural }} by accepted suggestions (prompts)</div>
                 <div style="width: 300px; height: 300px;">
                   <Pie :data="breakdownsChartDataTop5AcceptedPrompts" :options="chartOptions" />
                 </div>
@@ -210,9 +210,6 @@ export default defineComponent({
      // console.log('Breakdown:', breakdown);
     }));
 
-    // for test, it seems there is an issue in data, so need to get the data in console
-    console.log('Breakdown List:', JSON.stringify(breakdownList.value, null, 2));
-    
     //Sort breakdowns map by accepted prompts
     breakdownList.value.sort((a, b) => b.acceptedPrompts - a.acceptedPrompts);
 

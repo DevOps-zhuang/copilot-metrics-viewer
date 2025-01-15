@@ -4,7 +4,7 @@
             <v-card-item class="d-flex justify-center align-center">
                 <div class="tiles-text">
                     <div class="text-overline mb-1" style="visibility: hidden;">filler</div>
-                    <div class="text-h6 mb-1">Total Assigned  </div>
+                    <div class="text-h6 mb-1">Total Assigned </div>
                     <div class="text-caption">
                         Currently assigned seats
                     </div>
@@ -13,7 +13,8 @@
             </v-card-item>
         </v-card>
 
-        <v-card elevation="4" color="white" variant="elevated" class="mx-auto my-3" style="width: 300px; height: 175px;" @click="filterSeats('noshow')">
+        <v-card elevation="4" color="white" variant="elevated" class="mx-auto my-3"
+            style="width: 300px; height: 175px;" @click="filterSeats('noshow')">
             <v-card-item class="d-flex justify-center align-center">
                 <div class="tiles-text">
                     <div class="text-overline mb-1" style="visibility: hidden;">filler</div>
@@ -25,7 +26,7 @@
                 </div>
             </v-card-item>
         </v-card>
-        <v-card elevation="4" color="white" variant="elevated" class="mx-auto my-3" style="width: 300px; height: 175px;" @click="filterSeats('unused')">
+        <v-card elevation="4" color="white" variant="elevated" class="mx-auto my-4" style="width: 330px; height: 175px;" @click="filterSeats('unused')">
             <v-card-item class="d-flex justify-center align-center">
                 <div class="tiles-text">
                     <div class="text-overline mb-1" style="visibility: hidden;">filler</div>
@@ -62,7 +63,7 @@
             </v-card-item>
         </v-card>
     </div>
-    
+
     <div>
         <v-main class="p-1" style="min-height: 300px;">
             <v-container style="min-height: 300px;" class="px-4 elevation-2">
@@ -86,7 +87,7 @@
         </v-main>
     </div>
 </template>
-  
+
 <script lang="ts">
   import { defineComponent, ref , watchEffect, onMounted } from 'vue';
   import { Seat } from '../model/Seat';
@@ -101,27 +102,27 @@
     Title,
     Tooltip,
     Legend
-    } from 'chart.js'
+} from 'chart.js'
 
 ChartJS.register(
-  ArcElement, 
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
+    ArcElement,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
 )
 
 export default defineComponent({
-name: 'SeatsAnalysisViewer',
-props: {
+    name: 'SeatsAnalysisViewer',
+    props: {
         seats: {
             type: Array as () => Seat[],
             required: true,
-            default: () => []  
+            default: () => []
         }
     },
 data() {
@@ -145,12 +146,14 @@ setup(props) {
     const noActivity60DaysSeats = ref<Seat[]>([]);
     const filteredSeats = ref<Seat[]>([]);
 
-    watchEffect(() => {
-        if (props.seats && Array.isArray(props.seats)) {
-            totalSeats.value = props.seats;
+        watchEffect(() => {
+            if (props.seats && Array.isArray(props.seats)) {
+                totalSeats.value = props.seats;
 
-            const oneWeekAgo = new Date();
-            oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+                const oneWeekAgo = new Date();
+                const thirtyDaysAgo = new Date();
+                oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+                thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
             const thirtyDaysAgo = new Date();
             thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
