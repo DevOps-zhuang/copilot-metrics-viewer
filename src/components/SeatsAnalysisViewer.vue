@@ -151,15 +151,13 @@ setup(props) {
                 totalSeats.value = props.seats;
 
                 const oneWeekAgo = new Date();
-                const thirtyDaysAgo = new Date();
                 oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+                const thirtyDaysAgo = new Date();
                 thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
-            const thirtyDaysAgo = new Date();
-            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-
-            const sixtyDaysAgo = new Date();
-            sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60);
+                const sixtyDaysAgo = new Date();
+                sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60);
 
             noShowSeats.value = props.seats.filter(seat => seat.last_activity_at == null);
 
