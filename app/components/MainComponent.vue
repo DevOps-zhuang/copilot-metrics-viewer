@@ -261,6 +261,7 @@ const endDateInput = ref('');
 const selectedPreset = ref('');
 const presetOptions = [
   { title: 'Last 7 Days', value: 'last7Days' },
+  { title: 'Last 10 Days', value: 'last10Days' },
   { title: 'Last 30 Days', value: 'last30Days' },
   { title: 'This Month', value: 'thisMonth' },
   { title: 'All Available Data', value: 'allData' },
@@ -478,6 +479,15 @@ function handlePresetChange(preset: string) {
     startDateInput.value = formatDateToString(startDate);
     endDateInput.value = formatDateToString(endDate);
   } 
+  else if (preset === 'last10Days') {
+    // 使用数据中最后一天作为结束日期，计算10天前的日期
+    const endDate = new Date(dateRangeInfo.value.max);
+    const startDate = new Date(endDate);
+    startDate.setDate(endDate.getDate() - 10);
+    
+    startDateInput.value = formatDateToString(startDate);
+    endDateInput.value = formatDateToString(endDate);
+  }
   else if (preset === 'last30Days') {
     // 使用数据中最后一天作为结束日期
     const endDate = new Date(dateRangeInfo.value.max);
