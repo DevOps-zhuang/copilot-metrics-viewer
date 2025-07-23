@@ -63,7 +63,21 @@
         <v-data-table :headers="headers" :items="breakdownList" class="elevation-2" style="padding-left: 100px; padding-right: 100px;">
             <template #item="{item}">
                 <tr>
-                    <td>{{ item.name }}</td>
+                    <td>
+                      <div class="d-flex align-center">
+                        <v-btn 
+                          v-if="breakdownKey === 'language' && item.editors && item.editors.length > 0"
+                          icon
+                          size="small"
+                          variant="text"
+                          @click="toggleExpansion(item.name)"
+                          class="mr-2"
+                        >
+                          <v-icon>{{ expandedItems.has(item.name) ? 'mdi-chevron-down' : 'mdi-chevron-right' }}</v-icon>
+                        </v-btn>
+                        <span>{{ item.name }}</span>
+                      </div>
+                    </td>
                     <td>{{ item.acceptedPrompts }}</td>
                     <td>{{ item.suggestedPrompts }}</td>
                     <td>{{ item.acceptedLinesOfCode }}</td>
@@ -71,6 +85,21 @@
                     <td v-if="item.acceptanceRateByCount !== undefined">{{ item.acceptanceRateByCount.toFixed(2) }}%</td>
                     <td v-if="item.acceptanceRateByLines !== undefined">{{ item.acceptanceRateByLines.toFixed(2) }}%</td>
                 </tr>
+                <!-- Editor breakdown rows for expanded languages -->
+                <template v-if="breakdownKey === 'language' && item.editors && expandedItems.has(item.name)">
+                  <tr v-for="editor in item.editors" :key="`${item.name}-${editor.name}`" class="editor-row">
+                    <td class="pl-10">
+                      <v-icon class="mr-2" size="small">mdi-subdirectory-arrow-right</v-icon>
+                      {{ editor.name }}
+                    </td>
+                    <td>{{ editor.acceptedPrompts }}</td>
+                    <td>{{ editor.suggestedPrompts }}</td>
+                    <td>{{ editor.acceptedLinesOfCode }}</td>
+                    <td>{{ editor.suggestedLinesOfCode }}</td>
+                    <td>{{ editor.acceptanceRateByCount.toFixed(2) }}%</td>
+                    <td>{{ editor.acceptanceRateByLines.toFixed(2) }}%</td>
+                  </tr>
+                </template>
             </template>
         </v-data-table>
       </v-container>
@@ -81,7 +110,7 @@
 <script lang="ts">
 import { defineComponent, ref, toRef } from 'vue';
 import type { Metrics } from '@/model/Metrics';
-import { Breakdown } from '@/model/Breakdown';
+import { Breakdown, BreakdownEditor } from '@/model/Breakdown';
 import { Pie } from 'vue-chartjs'
 
 import {
@@ -129,6 +158,18 @@ export default defineComponent({
     // Create a reactive reference to store the breakdowns.
     const breakdownList = ref<Breakdown[]>([]);
 
+    // Track expanded items for nested breakdown
+    const expandedItems = ref<Set<string>>(new Set());
+    
+    // Toggle expansion of a breakdown item
+    const toggleExpansion = (itemName: string) => {
+      if (expandedItems.value.has(itemName)) {
+        expandedItems.value.delete(itemName);
+      } else {
+        expandedItems.value.add(itemName);
+      }
+    };
+
     // Number of breakdowns
     const numberOfBreakdowns = ref(0);
 
@@ -160,35 +201,110 @@ export default defineComponent({
     const data = toRef(props, 'metrics').value;
 
     // Process the breakdown separately
-    data.forEach((m: Metrics) => m.breakdown.forEach(breakdownData => 
-    {
-      const breakdownName = breakdownData[props.breakdownKey as keyof typeof breakdownData] as string;
-      let breakdown = breakdownList.value.find(b => b.name === breakdownName);
-
-      if (!breakdown) {
-        // Create a new breakdown object if it does not exist
-        breakdown = new Breakdown({
-          name: breakdownName,
-          acceptedPrompts: breakdownData.acceptances_count,
-          suggestedPrompts: breakdownData.suggestions_count,
-          suggestedLinesOfCode: breakdownData.lines_suggested,
-          acceptedLinesOfCode: breakdownData.lines_accepted,
+    if (props.breakdownKey === 'language') {
+      // For language breakdown, create nested structure with editors
+      const languageMap = new Map<string, Map<string, { acceptedPrompts: number, suggestedPrompts: number, suggestedLinesOfCode: number, acceptedLinesOfCode: number }>>();
+      
+      data.forEach((m: Metrics) => m.breakdown.forEach(breakdownData => {
+        const language = breakdownData.language;
+        const editor = breakdownData.editor;
+        
+        if (!languageMap.has(language)) {
+          languageMap.set(language, new Map());
+        }
+        
+        const editorsMap = languageMap.get(language)!;
+        if (!editorsMap.has(editor)) {
+          editorsMap.set(editor, {
+            acceptedPrompts: 0,
+            suggestedPrompts: 0,
+            suggestedLinesOfCode: 0,
+            acceptedLinesOfCode: 0
+          });
+        }
+        
+        const editorData = editorsMap.get(editor)!;
+        editorData.acceptedPrompts += breakdownData.acceptances_count;
+        editorData.suggestedPrompts += breakdownData.suggestions_count;
+        editorData.suggestedLinesOfCode += breakdownData.lines_suggested;
+        editorData.acceptedLinesOfCode += breakdownData.lines_accepted;
+      }));
+      
+      // Convert to breakdown list with nested editor information
+      for (const [language, editorsMap] of languageMap) {
+        const editors: BreakdownEditor[] = [];
+        let totalAcceptedPrompts = 0;
+        let totalSuggestedPrompts = 0;
+        let totalSuggestedLinesOfCode = 0;
+        let totalAcceptedLinesOfCode = 0;
+        
+        for (const [editorName, editorData] of editorsMap) {
+          const acceptanceRateByCount = editorData.suggestedPrompts !== 0 ? (editorData.acceptedPrompts / editorData.suggestedPrompts) * 100 : 0;
+          const acceptanceRateByLines = editorData.suggestedLinesOfCode !== 0 ? (editorData.acceptedLinesOfCode / editorData.suggestedLinesOfCode) * 100 : 0;
+          
+          editors.push(new BreakdownEditor({
+            name: editorName,
+            acceptedPrompts: editorData.acceptedPrompts,
+            suggestedPrompts: editorData.suggestedPrompts,
+            suggestedLinesOfCode: editorData.suggestedLinesOfCode,
+            acceptedLinesOfCode: editorData.acceptedLinesOfCode,
+            acceptanceRateByCount,
+            acceptanceRateByLines
+          }));
+          
+          totalAcceptedPrompts += editorData.acceptedPrompts;
+          totalSuggestedPrompts += editorData.suggestedPrompts;
+          totalSuggestedLinesOfCode += editorData.suggestedLinesOfCode;
+          totalAcceptedLinesOfCode += editorData.acceptedLinesOfCode;
+        }
+        
+        // Sort editors by accepted prompts
+        editors.sort((a, b) => b.acceptedPrompts - a.acceptedPrompts);
+        
+        const breakdown = new Breakdown({
+          name: language,
+          acceptedPrompts: totalAcceptedPrompts,
+          suggestedPrompts: totalSuggestedPrompts,
+          suggestedLinesOfCode: totalSuggestedLinesOfCode,
+          acceptedLinesOfCode: totalAcceptedLinesOfCode,
+          acceptanceRateByCount: totalSuggestedPrompts !== 0 ? (totalAcceptedPrompts / totalSuggestedPrompts) * 100 : 0,
+          acceptanceRateByLines: totalSuggestedLinesOfCode !== 0 ? (totalAcceptedLinesOfCode / totalSuggestedLinesOfCode) * 100 : 0,
+          editors
         });
         breakdownList.value.push(breakdown);
-      } else {
-        // Update the existing breakdown object
-        breakdown.acceptedPrompts += breakdownData.acceptances_count;
-        breakdown.suggestedPrompts += breakdownData.suggestions_count;
-        breakdown.suggestedLinesOfCode += breakdownData.lines_suggested;
-        breakdown.acceptedLinesOfCode += breakdownData.lines_accepted;
       }
-      // Recalculate the acceptance rates
-      breakdown.acceptanceRateByCount = breakdown.suggestedPrompts !== 0 ? (breakdown.acceptedPrompts / breakdown.suggestedPrompts) * 100 : 0;
-      breakdown.acceptanceRateByLines = breakdown.suggestedLinesOfCode !== 0 ? (breakdown.acceptedLinesOfCode / breakdown.suggestedLinesOfCode) * 100 : 0;
+    } else {
+      // Original logic for editor breakdown and other breakdown types
+      data.forEach((m: Metrics) => m.breakdown.forEach(breakdownData => 
+      {
+        const breakdownName = breakdownData[props.breakdownKey as keyof typeof breakdownData] as string;
+        let breakdown = breakdownList.value.find(b => b.name === breakdownName);
 
-      // Log each breakdown for debugging
-     // console.log('Breakdown:', breakdown);
-    }));
+        if (!breakdown) {
+          // Create a new breakdown object if it does not exist
+          breakdown = new Breakdown({
+            name: breakdownName,
+            acceptedPrompts: breakdownData.acceptances_count,
+            suggestedPrompts: breakdownData.suggestions_count,
+            suggestedLinesOfCode: breakdownData.lines_suggested,
+            acceptedLinesOfCode: breakdownData.lines_accepted,
+          });
+          breakdownList.value.push(breakdown);
+        } else {
+          // Update the existing breakdown object
+          breakdown.acceptedPrompts += breakdownData.acceptances_count;
+          breakdown.suggestedPrompts += breakdownData.suggestions_count;
+          breakdown.suggestedLinesOfCode += breakdownData.lines_suggested;
+          breakdown.acceptedLinesOfCode += breakdownData.lines_accepted;
+        }
+        // Recalculate the acceptance rates
+        breakdown.acceptanceRateByCount = breakdown.suggestedPrompts !== 0 ? (breakdown.acceptedPrompts / breakdown.suggestedPrompts) * 100 : 0;
+        breakdown.acceptanceRateByLines = breakdown.suggestedLinesOfCode !== 0 ? (breakdown.acceptedLinesOfCode / breakdown.suggestedLinesOfCode) * 100 : 0;
+
+        // Log each breakdown for debugging
+       // console.log('Breakdown:', breakdown);
+      }));
+    }
 
     //Sort breakdowns map by accepted prompts
     breakdownList.value.sort((a, b) => b.acceptedPrompts - a.acceptedPrompts);
@@ -229,7 +345,7 @@ export default defineComponent({
     numberOfBreakdowns.value = breakdownList.value.length;
 
     return { chartOptions, breakdownList, numberOfBreakdowns, 
-      breakdownsChartData, breakdownsChartDataTop5AcceptedPrompts, breakdownsChartDataTop5AcceptedPromptsByLines, breakdownsChartDataTop5AcceptedPromptsByCounts };
+      breakdownsChartData, breakdownsChartDataTop5AcceptedPrompts, breakdownsChartDataTop5AcceptedPromptsByLines, breakdownsChartDataTop5AcceptedPromptsByCounts, expandedItems, toggleExpansion };
   },
   computed: {
     breakdownDisplayName() {
@@ -254,3 +370,14 @@ export default defineComponent({
 
 });
 </script>
+
+<style scoped>
+.editor-row {
+  background-color: #f5f5f5;
+}
+
+.editor-row td {
+  font-size: 0.9em;
+  color: #666;
+}
+</style>
