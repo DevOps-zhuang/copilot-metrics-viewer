@@ -156,8 +156,8 @@
                 :metrics="filteredMetrics.length ? filteredMetrics : metrics" 
                 :key="`metrics-viewer-${config.public.githubOrg}-${metrics.length}`" 
               />
-              <BreakdownComponent v-if="item === 'languages'" :metrics="filteredMetrics.length ? filteredMetrics : metrics" :breakdown-key="'language'" />
-              <BreakdownComponent v-if="item === 'editors'" :metrics="filteredMetrics.length ? filteredMetrics : metrics" :breakdown-key="'editor'" />
+              <BreakdownComponent v-if="item === 'languages'" :metrics="filteredMetrics.length ? filteredMetrics : metrics" :breakdown-key="'language'" :child-key="'editor'" />
+              <BreakdownComponent v-if="item === 'editors'" :metrics="filteredMetrics.length ? filteredMetrics : metrics" :breakdown-key="'editor'" :child-key="'language'" />
               <CopilotChatViewer v-if="item === 'copilot chat'" :metrics="filteredMetrics.length ? filteredMetrics : metrics" />
               <SeatsAnalysisViewer v-if="item === 'seat analysis'" :seats="seats" />
               <ApiResponse

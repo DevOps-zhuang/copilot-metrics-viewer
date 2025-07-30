@@ -63,7 +63,21 @@
         <v-data-table :headers="headers" :items="breakdownList" class="elevation-2" style="padding-left: 100px; padding-right: 100px;">
             <template #item="{item}">
                 <tr>
-                    <td>{{ item.name }}</td>
+                    <td>
+                      <div style="display: flex; align-items: center;">
+                        <v-btn 
+                          v-if="$props.childKey && item.children && item.children.length > 0"
+                          icon
+                          size="small"
+                          variant="text"
+                          @click="toggleExpanded(item.name)"
+                          style="margin-right: 8px;"
+                        >
+                          <v-icon>{{ item.isExpanded ? 'mdi-chevron-down' : 'mdi-chevron-right' }}</v-icon>
+                        </v-btn>
+                        <span style="margin-left: 8px;">{{ item.name }}</span>
+                      </div>
+                    </td>
                     <td>{{ item.acceptedPrompts }}</td>
                     <td>{{ item.suggestedPrompts }}</td>
                     <td>{{ item.acceptedLinesOfCode }}</td>
@@ -71,6 +85,20 @@
                     <td v-if="item.acceptanceRateByCount !== undefined">{{ item.acceptanceRateByCount.toFixed(2) }}%</td>
                     <td v-if="item.acceptanceRateByLines !== undefined">{{ item.acceptanceRateByLines.toFixed(2) }}%</td>
                 </tr>
+                <!-- 子项显示 -->
+                <template v-if="$props.childKey && item.children && item.children.length > 0 && item.isExpanded">
+                  <tr v-for="child in item.children" :key="`${item.name}-${child.name}`" class="child-row">
+                    <td style="padding-left: 40px;">
+                      <span style="color: #666;">{{ child.name }}</span>
+                    </td>
+                    <td>{{ child.acceptedPrompts }}</td>
+                    <td>{{ child.suggestedPrompts }}</td>
+                    <td>{{ child.acceptedLinesOfCode }}</td>
+                    <td>{{ child.suggestedLinesOfCode }}</td>
+                    <td v-if="child.acceptanceRateByCount !== undefined">{{ child.acceptanceRateByCount.toFixed(2) }}%</td>
+                    <td v-if="child.acceptanceRateByLines !== undefined">{{ child.acceptanceRateByLines.toFixed(2) }}%</td>
+                  </tr>
+                </template>
             </template>
         </v-data-table>
       </v-container>
@@ -79,7 +107,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, toRef, watch } from 'vue';
+import { defineComponent, ref, toRef, watch, computed } from 'vue';
 import type { Metrics } from '@/model/Metrics';
 import { Breakdown } from '@/model/Breakdown';
 import { Pie } from 'vue-chartjs'
@@ -122,11 +150,16 @@ export default defineComponent({
       breakdownKey: {
           type: String,
           required: true
+      },
+      childKey: {
+          type: String,
+          required: false
       }
   },
-  setup(props) {
+  setup(props: { metrics: any; breakdownKey: string; childKey?: string }) {
     // Create a reactive reference to store the breakdowns.
     const breakdownList = ref<Breakdown[]>([]);
+    const expandedItems = ref<string[]>([]);
 
     // Number of breakdowns
     const numberOfBreakdowns = ref(0);
@@ -154,25 +187,88 @@ export default defineComponent({
     '#6495ED', // Cornflower Blue
     '#87CEFA', // Light Sky Blue
     '#7CFC00'  // Lawn Green
-]);
+    ]);
+
+    // 计算嵌套数据显示列表，包含展开/折叠状态
+    const displayBreakdownList = computed(() => {
+      if (!props.childKey) {
+        return breakdownList.value;
+      }
+      
+      return breakdownList.value.map((item: Breakdown) => ({
+        ...item,
+        children: getChildrenForBreakdown(item),
+        isExpanded: expandedItems.value.includes(item.name)
+      }));
+    });
+
+    // 获取指定 breakdown 的子项
+    function getChildrenForBreakdown(parentBreakdown: Breakdown): Breakdown[] {
+      if (!props.childKey) return [];
+      
+      const children: Breakdown[] = [];
+      
+      // 遍历原始 metrics 数据，找到属于该父项的子项
+      props.metrics.forEach((m: any) => {
+        m.breakdown.forEach((breakdownData: any) => {
+          const parentName = breakdownData[props.breakdownKey];
+          if (parentName === parentBreakdown.name) {
+            const childName = breakdownData[props.childKey!];
+            let child = children.find(c => c.name === childName);
+            
+            if (!child) {
+              child = new Breakdown({
+                name: childName,
+                acceptedPrompts: breakdownData.acceptances_count || 0,
+                suggestedPrompts: breakdownData.suggestions_count || 0,
+                suggestedLinesOfCode: breakdownData.lines_suggested || 0,
+                acceptedLinesOfCode: breakdownData.lines_accepted || 0,
+              });
+              children.push(child);
+            } else {
+              child.acceptedPrompts += breakdownData.acceptances_count || 0;
+              child.suggestedPrompts += breakdownData.suggestions_count || 0;
+              child.suggestedLinesOfCode += breakdownData.lines_suggested || 0;
+              child.acceptedLinesOfCode += breakdownData.lines_accepted || 0;
+            }
+            
+            // 重新计算接受率
+            child.acceptanceRateByCount = child.suggestedPrompts !== 0 ? (child.acceptedPrompts / child.suggestedPrompts) * 100 : 0;
+            child.acceptanceRateByLines = child.suggestedLinesOfCode !== 0 ? (child.acceptedLinesOfCode / child.suggestedLinesOfCode) * 100 : 0;
+          }
+        });
+      });
+      
+      return children.sort((a, b) => b.acceptedPrompts - a.acceptedPrompts);
+    }
+
+    // 切换展开/折叠状态
+    function toggleExpanded(itemName: string) {
+      const index = expandedItems.value.indexOf(itemName);
+      if (index > -1) {
+        expandedItems.value.splice(index, 1);
+      } else {
+        expandedItems.value.push(itemName);
+      }
+    };
 
     // 使用 watch 监听 props.metrics 的变化
-    watch(() => props.metrics, (newMetrics) => {
+    watch(() => props.metrics, (newMetrics: any) => {
       console.log('BreakdownComponent received new metrics data:', newMetrics.length);
       // 强制创建一个新的引用，确保数据变化被检测到
-      const metricsCopy = [...newMetrics];
+      const metricsCopy = Array.isArray(newMetrics) ? [...newMetrics] : [newMetrics];
       processBreakdownData(metricsCopy);
     }, { immediate: true, deep: true });
 
     // 将数据处理逻辑封装到单独的函数中
-    function processBreakdownData(data: Metrics[]) {
+    function processBreakdownData(data: any[]) {
       // 清空现有数据
       breakdownList.value = [];
 
       // 处理分解数据
-      data.forEach((m: Metrics) => m.breakdown.forEach(breakdownData => {
+      data.forEach((m: any) => m.breakdown.forEach((breakdownData: any) => {
         const breakdownName = breakdownData[props.breakdownKey as keyof typeof breakdownData] as string;
-        let breakdown = breakdownList.value.find(b => b.name === breakdownName);
+        let breakdown = breakdownList.value.find((b: Breakdown) => b.name === breakdownName);
 
         if (!breakdown) {
           // 如果不存在则创建新的分解对象
@@ -197,7 +293,7 @@ export default defineComponent({
       }));
 
       // 按接受的提示数量对分解列表进行排序
-      breakdownList.value.sort((a, b) => b.acceptedPrompts - a.acceptedPrompts);
+      breakdownList.value.sort((a: Breakdown, b: Breakdown) => b.acceptedPrompts - a.acceptedPrompts);
 
       // 获取接受的提示数量排名前 5 的分解
       const top5BreakdownsAcceptedPrompts = breakdownList.value.slice(0, 5);
@@ -205,10 +301,10 @@ export default defineComponent({
 
       // 更新图表数据
       breakdownsChartDataTop5AcceptedPrompts.value = {
-        labels: top5BreakdownsAcceptedPrompts.map(breakdown => breakdown.name),
+        labels: top5BreakdownsAcceptedPrompts.map((breakdown: Breakdown) => breakdown.name),
         datasets: [
           {
-            data: top5BreakdownsAcceptedPrompts.map(breakdown => breakdown.acceptedPrompts),
+            data: top5BreakdownsAcceptedPrompts.map((breakdown: Breakdown) => breakdown.acceptedPrompts),
             backgroundColor: pieChartColors.value,
           }
         ]
@@ -216,10 +312,10 @@ export default defineComponent({
 
       // 更新前 5 个分解的接受率 (按代码行)
       breakdownsChartDataTop5AcceptedPromptsByLines.value = {
-        labels: top5BreakdownsAcceptedPrompts.map(breakdown => breakdown.name),
+        labels: top5BreakdownsAcceptedPrompts.map((breakdown: Breakdown) => breakdown.name),
         datasets: [
           {
-            data: top5BreakdownsAcceptedPrompts.map(breakdown => breakdown.acceptanceRateByLines),
+            data: top5BreakdownsAcceptedPrompts.map((breakdown: Breakdown) => breakdown.acceptanceRateByLines),
             backgroundColor: pieChartColors.value,
           }
         ]
@@ -227,29 +323,28 @@ export default defineComponent({
 
       // 更新前 5 个分解的接受率 (按计数)
       breakdownsChartDataTop5AcceptedPromptsByCounts.value = {
-        labels: top5BreakdownsAcceptedPrompts.map(breakdown => breakdown.name),
+        labels: top5BreakdownsAcceptedPrompts.map((breakdown: Breakdown) => breakdown.name),
         datasets: [
           {
-            data: top5BreakdownsAcceptedPrompts.map(breakdown => breakdown.acceptanceRateByCount),
+            data: top5BreakdownsAcceptedPrompts.map((breakdown: Breakdown) => breakdown.acceptanceRateByCount),
             backgroundColor: pieChartColors.value,
           }
         ]
       };
     }
 
-    return { chartOptions, breakdownList, numberOfBreakdowns, 
-      breakdownsChartData, breakdownsChartDataTop5AcceptedPrompts, breakdownsChartDataTop5AcceptedPromptsByLines, breakdownsChartDataTop5AcceptedPromptsByCounts };
-  },
-  computed: {
-    breakdownDisplayName() {
-      return this.breakdownKey.charAt(0).toUpperCase() + this.breakdownKey.slice(1);
-    },
-    breakdownDisplayNamePlural() {
-      return `${this.breakdownDisplayName}s`;
-    },
-    headers() {
+    // 计算属性
+    const breakdownDisplayName = computed(() => {
+      return props.breakdownKey.charAt(0).toUpperCase() + props.breakdownKey.slice(1);
+    });
+
+    const breakdownDisplayNamePlural = computed(() => {
+      return `${breakdownDisplayName.value}s`;
+    });
+
+    const headers = computed(() => {
       return [
-        { title: `${this.breakdownDisplayName} Name`, key: 'name' },
+        { title: `${breakdownDisplayName.value} Name`, key: 'name' },
         { title: 'Accepted Prompts', key: 'acceptedPrompts' },
         { title: 'Suggested Prompts', key: 'suggestedPrompts' },
         { title: 'Accepted Lines of Code', key: 'acceptedLinesOfCode' },
@@ -257,9 +352,31 @@ export default defineComponent({
         { title: 'Acceptance Rate by Count (%)', key: 'acceptanceRateByCount' },
         { title: 'Acceptance Rate by Lines (%)', key: 'acceptanceRateByLines' },
       ];
-    },
-  },
-  
+    });
 
+    return { 
+      chartOptions, 
+      breakdownList: displayBreakdownList,
+      numberOfBreakdowns, 
+      breakdownsChartData, 
+      breakdownsChartDataTop5AcceptedPrompts, 
+      breakdownsChartDataTop5AcceptedPromptsByLines, 
+      breakdownsChartDataTop5AcceptedPromptsByCounts,
+      toggleExpanded,
+      breakdownDisplayName,
+      breakdownDisplayNamePlural,
+      headers
+    };
+  }
 });
 </script>
+
+<style scoped>
+.child-row {
+  background-color: #f9f9f9;
+}
+
+.child-row td {
+  border-top: 1px solid #e0e0e0;
+}
+</style>

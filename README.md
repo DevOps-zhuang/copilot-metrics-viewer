@@ -9,12 +9,19 @@ This application displays a set of charts with various metrics related to GitHub
 
 ## Recent Updates
 
+### July 2025 - Nested Breakdown Functionality
+- Implemented dynamic nested breakdowns for "Editors" and "Languages" sections.
+- Added support for parameterized breakdown keys and subcategories.
+- Enhanced table display with expand/collapse functionality for nested breakdowns.
+
 ### April 2025 - Date Filter Enhancement
 - Added a date range filter on specific tabs (metrics, languages, editors, copilot chat)
 - Implemented date picker with both preset options and custom date selection
 - Date selection automatically formats to YYYY-MM-DD for consistent filtering
 - Filter results are applied smoothly without page refresh
 - Filter can be easily cleared to view all available data
+
+
 
 ## Video
 
