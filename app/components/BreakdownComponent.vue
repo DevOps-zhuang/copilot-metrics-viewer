@@ -23,7 +23,7 @@
             <v-card>
               <v-card-item class="d-flex justify-center align-center">
                 <div class="spacing-25"/>
-                <div class="text-h6 mb-1">Top 5 {{ breakdownDisplayNamePlural }} by accepted suggestions (prompts)</div>
+                <div class="text-h6 mb-1">Top 10 {{ breakdownDisplayNamePlural }} by accepted suggestions (prompts)</div>
                 <div style="width: 300px; height: 300px;">
                   <Pie :data="breakdownsChartDataTop5AcceptedPrompts" :options="chartOptions" />
                 </div>
@@ -35,7 +35,7 @@
             <v-card>
               <v-card-item class="d-flex justify-center align-center">
                 <div class="spacing-25"/>
-                <div class="text-h6 mb-1">Acceptance Rate (by count) for Top 5 {{ breakdownDisplayNamePlural }}</div>
+                <div class="text-h6 mb-1">Acceptance Rate (by count) for Top 10 {{ breakdownDisplayNamePlural }}</div>
                 <div style="width: 300px; height: 300px;">
                   <Pie :data="breakdownsChartDataTop5AcceptedPromptsByCounts" :options="chartOptions" />
                 </div>
@@ -47,7 +47,7 @@
             <v-card>
               <v-card-item class="d-flex justify-center align-center">
                 <div class="spacing-25"/>
-                <div class="text-h6 mb-1">Acceptance Rate (by code lines) for Top 5 {{ breakdownDisplayNamePlural }}</div>
+                <div class="text-h6 mb-1">Acceptance Rate (by code lines) for Top 10 {{ breakdownDisplayNamePlural }}</div>
                 <div style="width: 300px; height: 300px;">
                   <Pie :data="breakdownsChartDataTop5AcceptedPromptsByLines" :options="chartOptions" />
                 </div>
@@ -154,7 +154,12 @@ export default defineComponent({
     '#41B883', // Vue Green
     '#6495ED', // Cornflower Blue
     '#87CEFA', // Light Sky Blue
-    '#7CFC00'  // Lawn Green
+    '#7CFC00', // Lawn Green
+    '#FF6347', // Tomato
+    '#9370DB', // Medium Purple
+    '#32CD32', // Lime Green
+    '#FF69B4', // Hot Pink
+    '#20B2AA'  // Light Sea Green
 ]);
 
     const data = toRef(props, 'metrics').value;
@@ -193,34 +198,34 @@ export default defineComponent({
     //Sort breakdowns map by accepted prompts
     breakdownList.value.sort((a, b) => b.acceptedPrompts - a.acceptedPrompts);
 
-    // Get the top 5 breakdowns by accepted prompts
-    const top5BreakdownsAcceptedPrompts = breakdownList.value.slice(0, 5);
+    // Get the top 10 breakdowns by accepted prompts
+    const top10BreakdownsAcceptedPrompts = breakdownList.value.slice(0, 10);
     
     breakdownsChartDataTop5AcceptedPrompts.value = {
-      labels: top5BreakdownsAcceptedPrompts.map(breakdown => breakdown.name),
+      labels: top10BreakdownsAcceptedPrompts.map(breakdown => breakdown.name),
       datasets: [
         {
-          data: top5BreakdownsAcceptedPrompts.map(breakdown => breakdown.acceptedPrompts),
+          data: top10BreakdownsAcceptedPrompts.map(breakdown => breakdown.acceptedPrompts),
           backgroundColor: pieChartColors.value,
         },
       ],
     };
 
     breakdownsChartDataTop5AcceptedPromptsByLines.value = {
-      labels: top5BreakdownsAcceptedPrompts.map(breakdown => breakdown.name),
+      labels: top10BreakdownsAcceptedPrompts.map(breakdown => breakdown.name),
       datasets: [
         {
-          data: top5BreakdownsAcceptedPrompts.map(breakdown => breakdown.acceptanceRateByLines.toFixed(2)),
+          data: top10BreakdownsAcceptedPrompts.map(breakdown => breakdown.acceptanceRateByLines.toFixed(2)),
           backgroundColor: pieChartColors.value,
         },
       ],
     };
 
     breakdownsChartDataTop5AcceptedPromptsByCounts.value = {
-      labels: top5BreakdownsAcceptedPrompts.map(breakdown => breakdown.name),
+      labels: top10BreakdownsAcceptedPrompts.map(breakdown => breakdown.name),
       datasets: [
         {
-          data: top5BreakdownsAcceptedPrompts.map(breakdown => breakdown.acceptanceRateByCount.toFixed(2)),
+          data: top10BreakdownsAcceptedPrompts.map(breakdown => breakdown.acceptanceRateByCount.toFixed(2)),
           backgroundColor: pieChartColors.value,
         },
       ],
