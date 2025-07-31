@@ -1,0 +1,782 @@
+<testsuites id="" name="" tests="9" failures="9" skipped="0" errors="0" time="33.24214">
+<testsuite name="metrics.spec.ts" timestamp="2025-07-31T10:08:46.649Z" hostname="chromium" tests="3" failures="3" skipped="0" time="0.002" errors="0">
+<testcase name="tests for Teams › languages visible" classname="metrics.spec.ts" time="0.002">
+<failure message="metrics.spec.ts:38:9 languages visible" type="FAILURE">
+<![CDATA[  [chromium] › metrics.spec.ts:38:9 › tests for Teams › languages visible @ent @org @team ──────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1148/chrome-linux/headless_shell
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1148/chrome-linux/headless_shell
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/metrics-tests-for-Teams-languages-visible-chromium-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/metrics-tests-for-Teams-languages-visible-chromium-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1148/chrome-linux/headless_shell
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/metrics-tests-for-Teams-languages-visible-chromium-retry1/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="tests for Orgs › languages visible" classname="metrics.spec.ts" time="0">
+<failure message="metrics.spec.ts:38:9 languages visible" type="FAILURE">
+<![CDATA[  [chromium] › metrics.spec.ts:38:9 › tests for Orgs › languages visible @ent @org @team ───────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1148/chrome-linux/headless_shell
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1148/chrome-linux/headless_shell
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/metrics-tests-for-Orgs-languages-visible-chromium-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/metrics-tests-for-Orgs-languages-visible-chromium-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1148/chrome-linux/headless_shell
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/metrics-tests-for-Orgs-languages-visible-chromium-retry1/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="tests for Enterprises › languages visible" classname="metrics.spec.ts" time="0">
+<failure message="metrics.spec.ts:38:9 languages visible" type="FAILURE">
+<![CDATA[  [chromium] › metrics.spec.ts:38:9 › tests for Enterprises › languages visible @ent @org @team ────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1148/chrome-linux/headless_shell
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1148/chrome-linux/headless_shell
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/metrics-tests-for-Enterprises-languages-visible-chromium-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/metrics-tests-for-Enterprises-languages-visible-chromium-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1148/chrome-linux/headless_shell
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/metrics-tests-for-Enterprises-languages-visible-chromium-retry1/trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="metrics.spec.ts" timestamp="2025-07-31T10:08:46.649Z" hostname="firefox" tests="3" failures="3" skipped="0" time="0.003" errors="0">
+<testcase name="tests for Teams › languages visible" classname="metrics.spec.ts" time="0.003">
+<failure message="metrics.spec.ts:38:9 languages visible" type="FAILURE">
+<![CDATA[  [firefox] › metrics.spec.ts:38:9 › tests for Teams › languages visible @ent @org @team ───────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/firefox-1466/firefox/firefox
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/firefox-1466/firefox/firefox
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/metrics-tests-for-Teams-languages-visible-firefox-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/metrics-tests-for-Teams-languages-visible-firefox-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/firefox-1466/firefox/firefox
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/metrics-tests-for-Teams-languages-visible-firefox-retry1/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="tests for Orgs › languages visible" classname="metrics.spec.ts" time="0">
+<failure message="metrics.spec.ts:38:9 languages visible" type="FAILURE">
+<![CDATA[  [firefox] › metrics.spec.ts:38:9 › tests for Orgs › languages visible @ent @org @team ────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/firefox-1466/firefox/firefox
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/firefox-1466/firefox/firefox
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/metrics-tests-for-Orgs-languages-visible-firefox-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/metrics-tests-for-Orgs-languages-visible-firefox-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/firefox-1466/firefox/firefox
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/metrics-tests-for-Orgs-languages-visible-firefox-retry1/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="tests for Enterprises › languages visible" classname="metrics.spec.ts" time="0">
+<failure message="metrics.spec.ts:38:9 languages visible" type="FAILURE">
+<![CDATA[  [firefox] › metrics.spec.ts:38:9 › tests for Enterprises › languages visible @ent @org @team ─────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/firefox-1466/firefox/firefox
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/firefox-1466/firefox/firefox
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/metrics-tests-for-Enterprises-languages-visible-firefox-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/metrics-tests-for-Enterprises-languages-visible-firefox-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/firefox-1466/firefox/firefox
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/metrics-tests-for-Enterprises-languages-visible-firefox-retry1/trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="metrics.spec.ts" timestamp="2025-07-31T10:08:46.649Z" hostname="webkit" tests="3" failures="3" skipped="0" time="0.001" errors="0">
+<testcase name="tests for Teams › languages visible" classname="metrics.spec.ts" time="0.001">
+<failure message="metrics.spec.ts:38:9 languages visible" type="FAILURE">
+<![CDATA[  [webkit] › metrics.spec.ts:38:9 › tests for Teams › languages visible @ent @org @team ────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/webkit-2104/pw_run.sh
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/webkit-2104/pw_run.sh
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/metrics-tests-for-Teams-languages-visible-webkit-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/metrics-tests-for-Teams-languages-visible-webkit-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/webkit-2104/pw_run.sh
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/metrics-tests-for-Teams-languages-visible-webkit-retry1/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="tests for Orgs › languages visible" classname="metrics.spec.ts" time="0">
+<failure message="metrics.spec.ts:38:9 languages visible" type="FAILURE">
+<![CDATA[  [webkit] › metrics.spec.ts:38:9 › tests for Orgs › languages visible @ent @org @team ─────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/webkit-2104/pw_run.sh
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/webkit-2104/pw_run.sh
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/metrics-tests-for-Orgs-languages-visible-webkit-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/metrics-tests-for-Orgs-languages-visible-webkit-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/webkit-2104/pw_run.sh
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/metrics-tests-for-Orgs-languages-visible-webkit-retry1/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="tests for Enterprises › languages visible" classname="metrics.spec.ts" time="0">
+<failure message="metrics.spec.ts:38:9 languages visible" type="FAILURE">
+<![CDATA[  [webkit] › metrics.spec.ts:38:9 › tests for Enterprises › languages visible @ent @org @team ──────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/webkit-2104/pw_run.sh
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/webkit-2104/pw_run.sh
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/metrics-tests-for-Enterprises-languages-visible-webkit-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/metrics-tests-for-Enterprises-languages-visible-webkit-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/webkit-2104/pw_run.sh
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    TypeError: Cannot read properties of undefined (reading 'close')
+
+      25 |
+      26 |         test.afterAll(async () => {
+    > 27 |             await dashboard.close();
+         |                             ^
+      28 |         });
+      29 |
+      30 |         test('metrics labels visible', tag, async () => {
+        at /home/runner/work/copilot-metrics-viewer/copilot-metrics-viewer/e2e-tests/metrics.spec.ts:27:29
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/metrics-tests-for-Enterprises-languages-visible-webkit-retry1/trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>
